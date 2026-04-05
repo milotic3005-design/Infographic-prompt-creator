@@ -183,50 +183,48 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-teal-200">
+    <div className="min-h-screen bg-cream text-black font-sans selection:bg-matcha-300">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <header className="bg-cream/90 backdrop-blur-[12px] border-b border-oat sticky top-0 z-10">
+        <div className="px-[32px] py-[14px] flex items-center justify-between max-w-[1440px] mx-auto">
           <div className="flex items-center gap-2">
-            <div className="bg-teal-600 p-2 rounded-lg">
-              <Activity className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="font-semibold text-xl tracking-tight text-slate-800">
+            <Activity className="w-5 h-5 text-black" />
+            <h1 className="font-semibold text-[15px] text-black tracking-tight">
               IV Infographic Architect
             </h1>
           </div>
-          <div className="text-sm font-medium text-slate-500 flex items-center gap-1.5">
+          <div className="text-[15px] font-medium text-charcoal flex items-center gap-1.5">
             Clinical Pharmacy Tool
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="pt-[80px] pb-[64px] px-[32px] max-w-[1100px] mx-auto">
         {/* Hero / Input Section */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-4">
+        <div className="max-w-[1000px] mx-auto text-center mb-[64px]">
+          <h2 className="text-[44px] md:text-[72px] font-semibold leading-[1] tracking-[-1.32px] md:tracking-[-3.2px] mb-[16px]">
             Generate IV Handling Infographics
           </h2>
-          <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-[20px] text-silver max-w-[560px] mx-auto mb-[32px] leading-[1.4]">
             Enter an intravenous drug name. Our AI will extract verified handling data from FDA labeling and generate a professional, ready-to-use medical infographic.
           </p>
 
-          <form onSubmit={handleGenerate} className="relative max-w-xl mx-auto" suppressHydrationWarning>
+          <form onSubmit={handleGenerate} className="relative max-w-[560px] mx-auto" suppressHydrationWarning>
             <div className="relative flex items-center">
-              <Search className="absolute left-4 w-5 h-5 text-slate-400" />
+              <Search className="absolute left-4 w-5 h-5 text-silver" />
               <input
                 type="text"
                 value={drugName}
                 onChange={(e) => setDrugName(e.target.value)}
-                placeholder="e.g., Vancomycin, Meropenem, Piperacillin/Tazobactam"
-                className="w-full pl-12 pr-32 py-4 bg-white border-2 border-slate-200 rounded-2xl text-lg focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 transition-all shadow-sm"
+                placeholder="e.g., Vancomycin, Meropenem"
+                className="w-full pl-12 pr-[140px] py-3 bg-white border border-[#717989] rounded-[4px] text-[14px] focus:outline-none focus:ring-2 focus:ring-focus transition-all"
                 disabled={isProcessing}
                 suppressHydrationWarning
               />
               <button
                 type="submit"
                 disabled={isProcessing || !drugName.trim()}
-                className="absolute right-2 top-2 bottom-2 px-6 bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium rounded-xl transition-colors flex items-center gap-2"
+                className="absolute right-1.5 top-1.5 bottom-1.5 px-5 bg-black text-white font-medium text-[14px] rounded-[12px] transition-all hover:-translate-y-[3px] hover:-rotate-[4deg] hover:shadow-hard disabled:opacity-50 disabled:hover:transform-none disabled:hover:shadow-none flex items-center gap-2"
                 suppressHydrationWarning
               >
                 {isProcessing ? (
@@ -245,10 +243,10 @@ export default function App() {
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-6 p-4 bg-red-50 text-red-700 rounded-xl border border-red-100 flex items-start gap-3 text-left max-w-xl mx-auto"
+              className="mt-6 p-4 bg-white border border-pomegranate-400 rounded-[12px] shadow-clay flex items-start gap-3 text-left max-w-[560px] mx-auto"
             >
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-              <p className="text-sm font-medium">{error}</p>
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-pomegranate-400" />
+              <p className="text-[14px] font-medium text-black">{error}</p>
             </motion.div>
           )}
         </div>
@@ -260,79 +258,82 @@ export default function App() {
               ref={resultsRef}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="max-w-4xl mx-auto space-y-6"
+              className="max-w-[800px] mx-auto space-y-6"
             >
               {/* Clinical Analysis Card */}
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                  <div className="px-6 py-4 border-b border-slate-100 bg-slate-50 flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-teal-600" />
-                    <h3 className="font-semibold text-slate-800">Phase 1: Clinical Data Extraction</h3>
-                    {clinicalAnalysis && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
-                  </div>
-                  <div className="p-6">
-                    {clinicalAnalysis ? (
-                      <div className="prose prose-sm prose-slate max-w-none">
-                        <pre className="whitespace-pre-wrap font-mono text-xs bg-slate-50 p-4 rounded-xl border border-slate-100 text-slate-700">
-                          {clinicalAnalysis}
-                        </pre>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center py-12 text-slate-400">
-                        <Loader2 className="w-8 h-8 animate-spin mb-4 text-teal-500" />
-                        <p>Extracting FDA labeling data...</p>
-                      </div>
-                    )}
-                  </div>
+              <div className="bg-white rounded-[24px] shadow-clay border border-oat p-[24px]">
+                <div className="mb-[12px]">
+                  <span className="inline-block text-[9.6px] font-semibold px-[6px] py-[2px] rounded-[11px] bg-[rgba(7,138,82,0.1)] text-matcha-600 uppercase tracking-[1.08px]">
+                    Phase 1
+                  </span>
                 </div>
+                <div className="flex items-center gap-2 mb-[16px]">
+                  <h3 className="text-[20px] font-semibold tracking-[-0.4px] text-black">Clinical Data Extraction</h3>
+                  {clinicalAnalysis && <CheckCircle2 className="w-5 h-5 text-matcha-600 ml-auto" />}
+                </div>
+                
+                {clinicalAnalysis ? (
+                  <div className="prose prose-sm max-w-none">
+                    <pre className="whitespace-pre-wrap font-mono text-[14px] leading-[1.5] text-matcha-600 bg-cream p-4 rounded-[12px] border border-oat-light">
+                      {clinicalAnalysis}
+                    </pre>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-silver">
+                    <Loader2 className="w-8 h-8 animate-spin mb-4 text-matcha-600" />
+                    <p className="text-[14px]">Extracting FDA labeling data...</p>
+                  </div>
+                )}
+              </div>
 
-                {/* Image Prompt Card */}
-                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                  <div className="px-6 py-4 border-b border-slate-100 bg-slate-50 flex items-center gap-2">
-                    <ImageIcon className="w-5 h-5 text-blue-600" />
-                    <h3 className="font-semibold text-slate-800">Phase 2: Copy-Ready Image Prompt</h3>
-                    {imagePrompt && (
-                      <div className="ml-auto flex items-center gap-3">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                        <button
-                          onClick={handleCopy}
-                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-50 text-sm font-medium text-slate-600 rounded-lg transition-colors"
-                        >
-                          {copied ? (
-                            <>
-                              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                              Copied!
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4" />
-                              Copy Prompt
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    {imagePrompt ? (
-                      <div className="prose prose-sm prose-slate max-w-none">
-                        <pre className="whitespace-pre-wrap font-mono text-xs bg-blue-50/50 p-4 rounded-xl border border-blue-100 text-slate-700">
-                          {imagePrompt}
-                        </pre>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center py-12 text-slate-400">
-                        {isProcessing && !clinicalAnalysis ? (
-                          <p>Waiting for clinical data...</p>
-                        ) : (
-                          <>
-                            <Loader2 className="w-8 h-8 animate-spin mb-4 text-blue-500" />
-                            <p>Structuring infographic prompt...</p>
-                          </>
-                        )}
-                      </div>
-                    )}
-                  </div>
+              {/* Image Prompt Card */}
+              <div className="bg-white rounded-[24px] shadow-clay border border-oat p-[24px]">
+                <div className="flex items-center justify-between mb-[12px]">
+                  <span className="inline-block text-[9.6px] font-semibold px-[6px] py-[2px] rounded-[11px] bg-[rgba(67,8,159,0.1)] text-ube-800 uppercase tracking-[1.08px]">
+                    Phase 2
+                  </span>
+                  {imagePrompt && (
+                    <button
+                      onClick={handleCopy}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-white border border-oat text-[14px] font-medium text-black rounded-[12px] transition-all hover:-translate-y-[2px] hover:-rotate-[2deg] hover:shadow-hard-sm cursor-pointer"
+                    >
+                      {copied ? (
+                        <>
+                          <CheckCircle2 className="w-4 h-4 text-matcha-600" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Copy Prompt
+                        </>
+                      )}
+                    </button>
+                  )}
                 </div>
+                <div className="flex items-center gap-2 mb-[16px]">
+                  <h3 className="text-[20px] font-semibold tracking-[-0.4px] text-black">Copy-Ready Image Prompt</h3>
+                </div>
+                
+                {imagePrompt ? (
+                  <div className="prose prose-sm max-w-none">
+                    <pre className="whitespace-pre-wrap font-mono text-[14px] leading-[1.5] text-ube-800 bg-cream p-4 rounded-[12px] border border-oat-light">
+                      {imagePrompt}
+                    </pre>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-silver">
+                    {isProcessing && !clinicalAnalysis ? (
+                      <p className="text-[14px]">Waiting for clinical data...</p>
+                    ) : (
+                      <>
+                        <Loader2 className="w-8 h-8 animate-spin mb-4 text-ube-800" />
+                        <p className="text-[14px]">Structuring infographic prompt...</p>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
 
             </motion.div>
           )}
